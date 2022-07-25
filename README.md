@@ -4,7 +4,9 @@
 
 The [MemoryHelper.h](include/MemoryHelper.h) file is responsible for managing the storage of the variables on the non-volatile EEPROM memory.
 
-First, we declare a struct to pack the variables.
+### Implementation
+
+First, we declare a struct to pack the variables. There is an example below that can be modified to store any variable that is needed.
 
 ```c
 typedef struct {
@@ -42,3 +44,20 @@ EEPROM.put(ADDRESS, stored_data); // Função para escrever os valores na memór
 ```
 
 The address is an arbitrary choice.
+
+### Usage
+
+As the code is implemented on a namespace called `Memory`, to use in the main code simply assign the values to be saved to the variable `Memory::stored_data` and call `Memory::put()` to write the values to memory, as shown below:
+
+```c
+Memory::stored_data = {
+    {0.643, 0.16, 1.12},  // PID
+    220,                  // PWM max
+    160,                  // PWM min
+    14,                   // Contagem lateral
+    {65236, 43212, 76210} // Encoder ticks
+};
+Memory::put();
+```
+
+Likewise, to get the values from memory, call `Memory::put()` and then acess the values on the variable `Memory::stored_data`.

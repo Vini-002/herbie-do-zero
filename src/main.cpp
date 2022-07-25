@@ -8,11 +8,11 @@ void setup() {
   // Bluetooth::begin();
 
   // Memory::stored_data = {
-  //   {0.643, 0.16, 1.12}, // PID
-  //   220,
-  //   160,
-  //   14,
-  //   {65236, 43212, 76210}
+  //     {0.643, 0.16, 1.12},  // PID
+  //     220,                  // PWM max
+  //     160,                  // PWM min
+  //     14,                   // Contagem lateral
+  //     {65236, 43212, 76210} // Encoder ticks
   // };
   // Memory::put();
   // Serial.println("\n===== Done writing to EEPROM =====");
