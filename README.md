@@ -60,4 +60,4 @@ Memory::stored_data = {
 Memory::put();
 ```
 
-Likewise, to get the values from memory, call `Memory::put()` and then acess the values on the variable `Memory::stored_data`.
+Likewise, to get the values from memory, call `Memory::get()` and then acess the values on the variable `Memory::stored_data`.
