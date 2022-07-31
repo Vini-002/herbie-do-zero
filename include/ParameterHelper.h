@@ -3,6 +3,10 @@
 #include <EEPROM.h>
 #include <SoftwareSerial.h>
 
+/**
+ * @brief Manages storage and transmission of parameters
+ * 
+ */
 namespace Parameters
 {
     const uint8_t RX_PIN = 10, TX_PIN = 9, BAUD_RATE = 9600;
@@ -29,23 +33,39 @@ namespace Parameters
 
     SoftwareSerial serial(RX_PIN, TX_PIN);
 
-    void listen(){
+    /**
+     * @brief Receives the parameters over the serial communication (Bluetooth)
+     * 
+     */
+    void receive(){
         serial.begin(BAUD_RATE);
         serial.readBytes((byte *) &data, sizeof(MyData));
         write();
     }
 
+    /**
+     * @brief Sends the parameters over the serial communication (Bluetooth)
+     * 
+     */
     void send(){
         serial.begin(BAUD_RATE);
         read();
         serial.write((byte *) &data, sizeof(MyData));
     }
 
+    /**
+     * @brief Reads the parameters stored on memory (EEPROM)
+     * 
+     */
     void read()
     {
         EEPROM.get(MEM_ADDRESS, data);
     }
 
+    /**
+     * @brief Stores the parameters on memory (EEPROM)
+     * 
+     */
     void write()
     {
         EEPROM.put(MEM_ADDRESS, data);

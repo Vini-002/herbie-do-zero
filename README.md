@@ -1,8 +1,8 @@
 # herbie-do-zero
 
-## Memory
+## Parameters
 
-The [MemoryHelper.h](include/MemoryHelper.h) file is responsible for managing the storage of the variables on the non-volatile EEPROM memory.
+The [ParameterHelper.h](include/ParameterHelper.h) file is responsible for managing the storage of the variables on the non-volatile memory (EEPROM) and transmission of those variables using Bluetooth.
 
 ### Implementation
 
@@ -47,7 +47,7 @@ The address is an arbitrary choice.
 
 ### Usage
 
-As the code is implemented on a namespace called `Memory`, to use in the main code simply assign the values to be saved to the variable `Memory::stored_data` and call `Memory::put()` to write the values to memory, as shown below:
+As the code is implemented on a namespace called `Memory`, to use in the main code simply assign the values to be saved to the variable `Memory::stored_data` and call `Memory::write()` to write the values to memory, as shown below:
 
 ```c
 Memory::stored_data = {
@@ -57,7 +57,7 @@ Memory::stored_data = {
     14,                   // Contagem lateral
     {65236, 43212, 76210} // Encoder ticks
 };
-Memory::put();
+Memory::write();
 ```
 
-Likewise, to get the values from memory, call `Memory::get()` and then acess the values on the variable `Memory::stored_data`.
+Likewise, to get the values from memory, call `Memory::read()` and then acess the values on the variable `Memory::stored_data`.
