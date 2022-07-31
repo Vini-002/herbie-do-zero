@@ -14,14 +14,15 @@ namespace Parameters
     const uint8_t MEM_ADDRESS = 64;
     
     typedef struct {
-        float P;
-        float I;
-        float D;
+        float P; // Proporcional
+        float I; // Integral
+        float D; // Derivativo
     } PID;
     
     typedef struct {
         // Para armazenar mais dados
         // basta modificar esta estrutura
+
         PID pid;
         uint8_t pwm_max;
         uint8_t pwm_min;
