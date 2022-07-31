@@ -1,33 +1,33 @@
 #include <Arduino.h>
 
 // #include "BluetoothHelper.h"
-#include "MemoryHelper.h"
+#include "ParameterHelper.h"
 
 void setup() {
   Serial.begin(9600);
   // Bluetooth::begin();
 
-  // Memory::data = {
+  // Parameters::data = {
   //     {0.643, 0.16, 1.12},  // PID
   //     220,                  // PWM max
   //     160,                  // PWM min
   //     14,                   // Contagem lateral
   //     {65236, 43212, 76210} // Encoder ticks
   // };
-  // Memory::write();
+  // Parameters::write();
   // Serial.println("\n===== Done writing to EEPROM =====");
   
-  Memory::read();
+  Parameters::read();
   Serial.println("\n===== Done reading from EEPROM =====");
   
   Serial.print("\nP value: ");
-  Serial.println(Memory::data.pid.P);
+  Serial.println(Parameters::data.pid.P);
   Serial.print("\nD value: ");
-  Serial.println(Memory::data.pid.D);
+  Serial.println(Parameters::data.pid.D);
   Serial.print("\nPWM max value: ");
-  Serial.println(Memory::data.pwm_max);
+  Serial.println(Parameters::data.pwm_max);
   Serial.print("\nPWM min value: ");
-  Serial.println(Memory::data.pwm_min);
+  Serial.println(Parameters::data.pwm_min);
 }
 
 void loop() {
