@@ -6,7 +6,6 @@
 namespace Parameters
 {
     const uint8_t RX_PIN = 10, TX_PIN = 9, BAUD_RATE = 9600;
-    bool STARTED = false;
     
     const uint8_t MEM_ADDRESS = 64;
     
@@ -31,15 +30,13 @@ namespace Parameters
     SoftwareSerial serial(RX_PIN, TX_PIN);
 
     void listen(){
+        serial.begin(BAUD_RATE);
         serial.readBytes((byte *) &data, sizeof(MyData));
         write();
     }
 
     void send(){
-        if (!STARTED){
-            serial.begin(BAUD_RATE);
-            STARTED = true;
-        }
+        serial.begin(BAUD_RATE);
         read();
         serial.write((byte *) &data, sizeof(MyData));
     }
