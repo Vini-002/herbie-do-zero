@@ -2,8 +2,8 @@
 
 #include <EEPROM.h>
 
-#define ADDRESS 128
-// Escolha arbitrária de armazenar no 128 para evitar
+#define ADDRESS 64
+// Escolha arbitrária de armazenar no 64 para evitar
 // os bytes iniciais que já foram bastante utilizados
 
 namespace Memory
@@ -23,28 +23,17 @@ namespace Memory
         uint8_t pwm_min;
         uint8_t cont;
         uint32_t encoder_count[3];
-    } data;
+    } MyData;
 
-    data stored_data; // Variável pra guardar os dados
+    MyData data; // Variável pra guardar os dados
 
-    union data_union
+    void read()
     {
-        float P;
-        float I;
-        float D;
-        uint8_t pwm_min;
-        uint8_t pwm_max;
-        uint8_t cont;
-        uint32_t enc[3];
-    };
-    
-    void get()
-    {
-        EEPROM.get(ADDRESS, stored_data);
+        EEPROM.get(ADDRESS, data);
     }
 
-    void put()
+    void write()
     {
-        EEPROM.put(ADDRESS, stored_data);
+        EEPROM.put(ADDRESS, data);
     }
 }
