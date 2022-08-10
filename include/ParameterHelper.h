@@ -19,7 +19,8 @@ namespace Parameters
         float D; // Derivativo
     } PID;
     
-    typedef struct {
+    typedef struct MyData {
+        uint8_t size;
         // Para armazenar mais dados
         // basta modificar esta estrutura
 
@@ -28,9 +29,7 @@ namespace Parameters
         uint8_t pwm_min;
         uint8_t cont;
         uint32_t encoder_count[3];
-    } MyData; // Estrutura dos parâmetros
-
-    MyData data; // Variável pra guardar os valores dos parâmetros
+    } data = {sizeof(MyData)}; // Estrutura dos parâmetros
 
     SoftwareSerial serial(RX_PIN, TX_PIN);
 
@@ -40,7 +39,7 @@ namespace Parameters
      */
     void receive(){
         serial.begin(BAUD_RATE);
-        serial.readBytes((byte *) &data, sizeof(MyData));
+        serial.readBytes((byte *) &data, data.size);
         write();
     }
 
@@ -51,14 +50,14 @@ namespace Parameters
     void send(){
         serial.begin(BAUD_RATE);
         read();
-        serial.write((byte *) &data, sizeof(MyData));
+        serial.write((byte *) &data, data.size);
     }
 
     /**
      * @brief Reads the parameters stored on memory (EEPROM)
      * 
      */
-    void read()
+    void load()
     {
         EEPROM.get(MEM_ADDRESS, data);
     }
@@ -67,7 +66,7 @@ namespace Parameters
      * @brief Stores the parameters on memory (EEPROM)
      * 
      */
-    void write()
+    void save()
     {
         EEPROM.put(MEM_ADDRESS, data);
     }
