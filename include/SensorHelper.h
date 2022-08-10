@@ -14,27 +14,24 @@ namespace LineSensor
     const uint8_t PINS[] = {A0, A1, A2, A3, A4, A5, A7};
 
     typedef struct {
-        uint8_t avg;
+        uint8_t weighted_sum;
         uint8_t sum;
     } line_info;
 
-    line_info readline(){
+    line_info read(){
         
         line_info result = {0, 0};
 
         uint8_t value;
         
-        for (int i = 0; i < N_SENSORS; i++)
+        for (int i = 1; i <= N_SENSORS + 1; i++)
         {
             value = digitalRead(PINS[i]);
-            result.avg += value * i;
+            result.weighted_sum += value * i;
             result.sum += value;
         }
 
         return  result;
     }
-    
-    // sum all the values and 
-
 
 }
